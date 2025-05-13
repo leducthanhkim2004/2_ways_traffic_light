@@ -1,53 +1,8 @@
-# Espressif 32: development platform for [PlatformIO](https://platformio.org)
-
-[![Build Status](https://github.com/platformio/platform-espressif32/workflows/Examples/badge.svg)](https://github.com/platformio/platform-espressif32/actions)
-
-ESP32 is a series of low-cost, low-power system on a chip microcontrollers with integrated Wi-Fi and Bluetooth. ESP32 integrates an antenna switch, RF balun, power amplifier, low-noise receive amplifier, filters, and power management modules.
-
-* [Home](https://registry.platformio.org/platforms/platformio/espressif32) (home page in the PlatformIO Registry)
-* [Documentation](https://docs.platformio.org/page/platforms/espressif32.html) (advanced usage, packages, boards, frameworks, etc.)
-
-# Usage
-
-1. [Install PlatformIO](https://platformio.org)
-2. Create PlatformIO project and configure a platform option in [platformio.ini](https://docs.platformio.org/page/projectconf.html) file:
-
-## Stable version
-
-See `platform` [documentation](https://docs.platformio.org/en/latest/projectconf/sections/env/options/platform/platform.html#projectconf-env-platform) for details.
-
-```ini
-[env:stable]
-; recommended to pin to a version, see https://github.com/platformio/platform-espressif32/releases
-; platform = espressif32 @ ^6.0.1
-platform = espressif32
-board = yolo_uno
-framework = arduino
-monitor_speed = 115200
-
-build_flags =
-    -D ARDUINO_USB_MODE=1
-    -D ARDUINO_USB_CDC_ON_BOOT=1
-```
-
-## Development version
-
-```ini
-[env:development]
-platform = https://github.com/platformio/platform-espressif32.git
-board = yolo_uno
-framework = arduino
-monitor_speed = 115200
-build_flags =
-    -D ARDUINO_USB_MODE=1
-    -D ARDUINO_USB_CDC_ON_BOOT=1
-```
-
 # YoloUNO ESP32-S3 LED Blinky Project
 
 ## Project Overview
 
-This project implements a simple LED blinking application using the Yolo_Uno_S3 board based on the ESP32-S3 microcontroller. It demonstrates the basic functionality of controlling GPIO pins for LED output.
+This project implements a simple 2 way traffic light  application using the Yolo_Uno_S3 board based on the ESP32-S3 microcontroller. It demonstrates the basic functionality of cooperative scheduler and software timer on RTOS .
 
 ## Hardware Requirements
 
@@ -89,6 +44,22 @@ build_flags =
    ```
 
 ## Code Structure
+
+The project is organized with the following source files:
+
+```
+📦src
+ ┣ 📂lab4_main
+ ┃ ┣ 📂.theia
+ ┃ ┃ ┗ 📜launch.json
+ ┃ ┣ 📜fsm.c            # Finite State Machine implementation
+ ┃ ┣ 📜fsm.h            # FSM header with state definitions
+ ┃ ┣ 📜main.cpp         # Main application entry point
+ ┃ ┣ 📜scheduler.c      # Task scheduler implementation
+ ┃ ┣ 📜scheduler.h      # Scheduler header with task management functions
+ ┃ ┣ 📜software_time.c  # Software timer implementation
+ ┃ ┗ 📜software_time.h  # Timer functions and definitions
+```
 
 The main application code is in `src/main.cpp` and demonstrates:
 - GPIO pin configuration
